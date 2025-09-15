@@ -1,3 +1,10 @@
+[![CI](https://github.com/Cartesian-School/runtime-type-checker/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/Cartesian-School/runtime-type-checker/actions/workflows/ci.yml)
+
+[![Docs](https://github.com/Cartesian-School/runtime-type-checker/actions/workflows/pages.yml/badge.svg?branch=master)](https://github.com/Cartesian-School/runtime-type-checker/actions/workflows/pages.yml)
+
+![CI](https://img.shields.io/github/actions/workflow/status/Cartesian-School/runtime-type-checker/ci.yml?branch=master&label=CI&logo=github)
+
+
 # Runtime Type Checker
 
 Minimal decorator `@runtime_check` that validates function arguments and return values **at runtime** using Python annotations. No external dependencies.
