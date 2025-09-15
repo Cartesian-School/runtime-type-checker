@@ -6,8 +6,9 @@ and return values **at runtime** based on their type annotations.
 Features
 --------
 - Validates function arguments and the return value at call time.
-- Supports common typing constructs: builtins (``int``, ``str``...), ``Union``/``Optional``,
-  ``list[T]``, ``set[T]``, ``tuple[...]``, ``dict[K, V]``, ``Tuple[T, ...]`` and fixed-length tuples.
+- Supports common typing constructs: builtins (``int``, ``str``...),
+  ``Union``/``Optional``, ``list[T]``, ``set[T]``, ``tuple[...]``,
+  ``dict[K, V]``, ``Tuple[T, ...]`` and fixed-length tuples.
 - Pure stdlib only (``inspect`` and ``typing``), no external dependencies.
 
 Notes
@@ -34,11 +35,19 @@ Example
 
 from __future__ import annotations
 
-from collections.abc import Callable
 import functools
 import inspect
+from collections.abc import Callable
 from types import UnionType
-from typing import Any, ParamSpec, TypeVar, Union, get_args, get_origin, get_type_hints
+from typing import (
+    Any,
+    ParamSpec,
+    TypeVar,
+    Union,
+    get_args,
+    get_origin,
+    get_type_hints,
+)
 
 P = ParamSpec("P")
 R = TypeVar("R")
