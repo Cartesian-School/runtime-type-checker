@@ -20,7 +20,7 @@ jobs:
           pip install mypy ruff pytest sphinx
 
       - name: Lint
-        run: ruff src tests
+        run: ruff check src tests
 
       - name: Type check
         run: mypy src
