@@ -4,14 +4,17 @@ stages:
   - test
   - docs
 
+image: python:3.11-slim
+
 before_script:
-  - pip install -r requirements.txt
-  - pip install mypy ruff pytest sphinx
+  - python -m pip install --upgrade pip
+  - pip install ruff mypy pytest sphinx furo
 
 lint:
   stage: lint
   script:
-    - ruff src tests
+    - ruff check src tests
+    - ruff format --check src tests
 
 typecheck:
   stage: typecheck
@@ -21,10 +24,13 @@ typecheck:
 test:
   stage: test
   script:
-    - pytest tests
+    - PYTHONPATH=. pytest -q
 
 docs:
   stage: docs
   script:
-    - cd docs
-    - make html
+    - sphinx-build -b html docs/source docs/build
+  artifacts:
+    when: always
+    paths:
+      - docs/build

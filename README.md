@@ -1,34 +1,84 @@
 # Runtime Type Checker
 
-🧪 Minimal decorator `@runtime_check` that validates function arguments and return types using Python's type hints — at runtime.
+Minimal decorator `@runtime_check` that validates function arguments and return values **at runtime** using Python annotations. No external dependencies.
 
-## ✅ Features
 
-- Supports `int`, `str`, `list[int]`, `dict[str, int]`, `Union[int, str]`
-- No external dependencies (uses only `typing`, `inspect`)
-- Easy to integrate into your existing codebase
-
-## 🚀 CI/CD Included
-
-- ✅ GitHub Actions: lint, type, test, build docs
-- ✅ GitLab CI: same setup
-
-## 📚 Documentation
-
-Generated with Sphinx. Run:
-
-```bash
-cd docs
-make html
+```
+runtime-type-checker/
+├── src/
+│   └── runtime_check.py
+├── tests/
+│   └── test_runtime_check.py
+├── docs/
+│   └── source/
+│       ├── conf.py
+│       └── index.rst
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+├── .gitlab-ci.yml
+├── pyproject.toml
+├── README.md
+└── .gitignore
 ```
 
-## 🔍 Example
+## Features
+
+- ✅ Supports `int/str/...`, `Union/Optional`, `list[T]`, `set[T]`, `tuple[...]`, `dict[K, V]`
+- ✅ Preserves function metadata
+- ✅ Pure stdlib (`inspect`, `typing`)
+- ✅ CI for linting, typing, testing, docs (GitHub Actions / GitLab CI)
+
+
+## Install (local dev)
+
+This project uses a plain `src/` layout without packaging. Just run:
+
+```bash
+python -m pip install --upgrade pip
+pip install -r <(echo -e "ruff\nmypy\npytest\nsphinx")
+````
+
+Or with **uv**:
+
+```bash
+uv pip install ruff mypy pytest sphinx
+```
+
+## Usage
 
 ```python
+from runtime_check import runtime_check
+
 @runtime_check
 def greet(name: str) -> str:
     return "Hello " + name
 
-greet("Alice")  # OK
-greet(123)      # TypeError
+print(greet("Alice"))  # OK
+# greet(123) -> TypeError
 ```
+
+## Tests
+
+```bash
+PYTHONPATH=. pytest -q
+```
+
+## Docs
+
+Local build:
+
+```bash
+sphinx-build -b html docs/source docs/build
+# open docs/build/index.html
+```
+
+## CI
+
+* GitHub Actions: `.github/workflows/ci.yml`
+* GitLab CI: `.gitlab-ci.yml`
+
+## License
+
+MIT
+

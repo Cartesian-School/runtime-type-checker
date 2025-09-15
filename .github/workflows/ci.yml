@@ -1,34 +1,39 @@
-name: CI Pipeline
+name: CI
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Install dependencies
+      - name: Install tools (latest)
         run: |
-          pip install -r requirements.txt
-          pip install mypy ruff pytest sphinx
-
-      - name: Lint
-        run: ruff check src tests
-
-      - name: Type check
-        run: mypy src
-
-      - name: Tests
-        run: pytest tests
-
-      - name: Build docs
+          python -m pip install --upgrade pip
+          pip install ruff mypy pytest sphinx furo
+          
+      - name: 🔎 Ruff (lint + format check)
         run: |
-          cd docs
-          make html
+          ruff version
+          ruff check src tests
+          ruff format --check src tests
+
+      - name: Mypy (type check)
+        run: mypy --version && mypy src
+
+      - name: Pytest
+        run: PYTHONPATH=. pytest -q
+
+      - name: Build docs (sphinx-build)
+        run: |
+          sphinx-build -b html docs/source docs/build
