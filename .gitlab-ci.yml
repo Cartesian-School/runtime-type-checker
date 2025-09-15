@@ -1,0 +1,30 @@
+stages:
+  - lint
+  - typecheck
+  - test
+  - docs
+
+before_script:
+  - pip install -r requirements.txt
+  - pip install mypy ruff pytest sphinx
+
+lint:
+  stage: lint
+  script:
+    - ruff src tests
+
+typecheck:
+  stage: typecheck
+  script:
+    - mypy src
+
+test:
+  stage: test
+  script:
+    - pytest tests
+
+docs:
+  stage: docs
+  script:
+    - cd docs
+    - make html

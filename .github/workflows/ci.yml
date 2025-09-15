@@ -1,0 +1,34 @@
+name: CI Pipeline
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install mypy ruff pytest sphinx
+
+      - name: Lint
+        run: ruff src tests
+
+      - name: Type check
+        run: mypy src
+
+      - name: Tests
+        run: pytest tests
+
+      - name: Build docs
+        run: |
+          cd docs
+          make html
