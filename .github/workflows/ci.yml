@@ -4,6 +4,9 @@ on:
   push:
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,7 +24,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install ruff mypy pytest sphinx furo
-          
+
       - name: 🔎 Ruff (lint + format check)
         run: |
           ruff version
@@ -35,5 +38,4 @@ jobs:
         run: PYTHONPATH=. pytest -q
 
       - name: Build docs (sphinx-build)
-        run: |
-          sphinx-build -b html docs/source docs/build
+        run: sphinx-build -b html docs/source docs/build
