@@ -1,4 +1,14 @@
-from src.runtime_check import runtime_check
+# --- tests/test_runtime_check.py ---
+
+# added path src/ in sys.path
+import sys
+import os
+
+# absolut path ../src
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "src")))
+
+from runtime_check import runtime_check
+
 import pytest
 
 @runtime_check
@@ -22,3 +32,4 @@ def test_add_all_correct():
 def test_add_all_invalid():
     with pytest.raises(TypeError):
         add_all(["a", "b"])
+
