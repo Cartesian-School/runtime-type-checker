@@ -1,8 +1,7 @@
-[![CI](https://github.com/Cartesian-School/runtime-type-checker/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/Cartesian-School/runtime-type-checker/actions/workflows/ci.yml)
-
-[![Docs](https://github.com/Cartesian-School/runtime-type-checker/actions/workflows/pages.yml/badge.svg?branch=master)](https://github.com/Cartesian-School/runtime-type-checker/actions/workflows/pages.yml)
-
 ![CI](https://img.shields.io/github/actions/workflow/status/Cartesian-School/runtime-type-checker/ci.yml?branch=master&label=CI&logo=github)
+![Python](https://img.shields.io/badge/Python-3.11%20%7C%203.12%20%7C%203.13-3776AB?logo=python&logoColor=white)
+![uv](https://img.shields.io/badge/uv-supported-111111)
+
 
 
 # Runtime Type Checker
